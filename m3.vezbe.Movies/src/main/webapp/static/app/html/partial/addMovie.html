@@ -1,0 +1,17 @@
+<div ng-controller="addMovieController">
+	<form>
+		<label for="basic-url">Title:</label>
+		<input class="form-control" ng-model="movie.title">
+
+		<label for="basic-url">Year:</label>
+		<input class="form-control" ng-model="movie.year">
+
+		<label>Rate:</label>
+		<input class="form-control" ng-model="movie.rate">
+
+		<label>Genre:</label>
+		<select class="form-control" ng-options="genre.name for genre in genres track by genre.id" ng-model="movie.genre"></select>
+
+		<button class="btn btn-success" ng-click="save()">Save</button>
+	</form>
+</div>

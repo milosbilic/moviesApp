@@ -1,0 +1,98 @@
+<div ng-controller="moviesController">
+	
+	<div class="panel panel-success">
+		<div class="panel-heading">Save Movie</div>
+		<form>
+			<label>Title:</label>
+			<input class="form-control" ng-model="movie.title">
+
+			<label>Year:</label>
+			<input class="form-control" ng-model="movie.year">
+
+			<label>Rating:</label>
+			<input class="form-control" ng-model="movie.rate">
+
+			<label>Genre:</label>
+			<select class="form-control" ng-options="genre.name for genre in genres track by genre.id" ng-model="movie.genre"></select>
+			<br>
+			<button class="btn btn-success center-block" ng-click="save()">Save</button>
+		</form>
+	</div>
+
+	<div class="panel panel-success">
+		<div class="panel-heading">Filter Movies</div>
+		<form>
+
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<label>Title:</label>
+					<input class="form-control" ng-model="filterTitle">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4 text-center">
+					<label>Year:</label>
+					<input class="form-control" ng-model="filterYear">
+				</div>
+				<div class="col-sm-4 text-center">
+					<label>Rating:</label>
+					<select class="form-control" name="rating" ng-model="filterRating">
+						<option value="" selected>All</option>
+						<option value="1">1+</option>
+						<option value="2">2+</option>
+						<option value="3">3+</option>
+						<option value="4">4+</option>
+						<option value="5">5+</option>
+						<option value="6">6+</option>
+						<option value="7">7+</option>
+						<option value="8">8+</option>
+						<option value="9">9+</option>
+					</select>
+				</div>
+				<div class="col-sm-4 text-center">
+					<label>Genre:</label>
+					<select class="form-control" ng-model="filterGenre">
+						<option value="">All</option>
+						<option value="{{genre.id}}" ng-repeat="genre in genres" selected>{{genre.name}}</option>
+					</select>
+				</div>
+			</div>
+			<br>
+			<button class="btn btn-success center-block" ng-click="filterParameters()">Filter</button>
+		</form>
+	</div>
+
+	<div class="btn-group pull-right">
+		<button class="btn btn-primary" ng-disabled="currentPage < 1" ng-click="changePage(-1)">Previous</button>
+		<button class="btn btn-primary" ng-disabled="currentPage >= totalPages - 1" ng-click="changePage(1)">Next</button>
+	</div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Title</th>
+				<th>Year</th>
+				<th>Rate</th>
+				<th>Genre</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr ng-repeat="movie in movies">
+				<td>{{movie.id}}</td>
+				<td>{{movie.title}}</td>
+				<td>{{movie.year}}</td>
+				<td>{{movie.rate}}<span class="glyphicon glyphicon-star" aria-hidden="true"></span></td>
+				<td>{{movie.genre.name}}</td>
+				<td>
+					<button class="btn btn-success" ng-click="setMovieValues(movie)">Edit</button>
+					<button class="btn btn-warning" ng-click="goToAddMovieHTML(movie.id)">Edit on New Page</button>
+					<button class="btn btn-danger" ng-click="delete(movie.id)">Delete</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
